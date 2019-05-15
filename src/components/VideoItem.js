@@ -7,7 +7,7 @@ const VideoItem = ({video, onVideoSelect}) => {
       className="list-group-item d-flex align-items-center"
       onClick={()=> onVideoSelect(video)}
     >
-      <img src={video.snippet.thumbnails.medium.url} alt={video.snippet.title}/>
+      <img src={video.snippet.thumbnails.medium.url} alt={video.snippet.title} style={{width: '200px'}}/>
       <div className="font-weight-bold ml-3">{video.snippet.title}</div>
     </div>
   );

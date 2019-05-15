@@ -11,13 +11,20 @@ class App extends React.Component {
     selectedVideo: null
   };
 
+  componentDidMount() {
+    this.onTermSubmit('cute dogs');
+  }
+
   onTermSubmit = async term => {
     const response = await youtube.get('/search', {
       params: {
         q: term
       }
     });
-    this.setState({videos: response.data.items});
+    this.setState({
+      videos: response.data.items,
+      selectedVideo: response.data.items[0]
+    });
 
   }
 
@@ -29,11 +36,11 @@ class App extends React.Component {
     return (
     <div className='container'>
       <SearchBar onTermSubmit={this.onTermSubmit}/>
-      <div className="d-flex justify-content-between">
-        <div className="mr-2">
+      <div className="row">
+        <div className="col-sm-7">
           <VideoDetail video={this.state.selectedVideo}/>
         </div>
-        <div className="list-group ml-2">
+        <div className="list-group col-sm-5">
           <VideoList videos={this.state.videos} onVideoSelect={this.onVideoSelect}/>
         </div>
       </div>
